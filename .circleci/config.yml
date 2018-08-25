@@ -25,9 +25,11 @@ jobs:
     working_directory: ~/rest-items
     docker:
       - image: circleci/golang
+    environemnt:
+      CI_TAG: {{ .Branch }}
     steps:
       - run: go get -u github.com/tcnksm/ghr
-      - run: ghr {{ .Branch }} target/deploy/io/cloudonix/playground/rest-items/*/
+      - run: ghr "$CI_TAG" target/deploy/io/cloudonix/playground/rest-items/*/
 
 workflows:
   version: 2
