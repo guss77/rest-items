@@ -1,0 +1,72 @@
+#cloud-config
+package_upgrade: true
+package_reboot_if_required: true
+
+apt:
+ preserve_sources_list: true
+ conf: | # APT config
+    Acquire::ForceIPv4 "true";
+    APT {
+      Get {
+        Assume-Yes "true";
+        Fix-Broken "true";
+        Acquire::ForceIPv4 "true";
+      };
+    };
+ sources:
+  docker:
+   source: deb https://download.docker.com/linux/ubuntu bionic stable
+   keyid: 7EA0A9C3F273FCD8
+
+packages:
+ # system
+ - ntp
+ - postfix
+ # script support
+ - curl
+ - jq
+ - awscli
+ - make
+ # dependencies
+ - docker-ce
+ - ruby
+ - mysql-client
+ # for debugging (to remove)
+ - mc
+ - htop
+
+write_files:
+ - path: /etc/systemd/system/rest-items.service
+   permissions: '0644'
+   content: |
+     [Unit]
+     Description=rest-items
+     Requires=docker.service
+     
+     [Service]
+     SyslogIdentifier=rest-items
+     ExecStartPre=-/usr/bin/docker kill rest-items
+     ExecStartPre=-/usr/bin/docker rm rest-items
+     ExecStartPre=/usr/bin/docker pull openjdk:10-slim
+     ExecStartPre=/usr/bin/curl -sfL https://github.com/guss77/rest-items/releases/download/1.0.3/rest-items-1.0.3-fat.jar -o /usr/local/bin/rest-items.jar
+     ExecStart=/usr/bin/docker run -a stdout -a stderr \
+       --name rest-items \
+       -e "JVM_OPTIONS=-Xmx800m -XX:+CrashOnOutOfMemoryError" \
+       -p 80:1280  \
+       -v /usr/local/bin/rest-items.jar:/app/rest-items.jar \
+       openjdk:10-slim java -jar /app/rest-items.jar
+     ExecStop=/usr/bin/docker stop rest-items
+     Restart=always
+     RestartSec=1s
+     
+     [Install]
+     WantedBy=multi-user.target
+
+runcmd:
+ # configure postfix
+ - 'echo "root: ops@cloudonix.io" >> /etc/aliases'
+ - newaliases
+ - postconf -e "inet_protocols = ipv4"
+ - systemctl daemon-reload
+ - systemctl enable rest-items.service
+ - systemctl restart rest-items.service

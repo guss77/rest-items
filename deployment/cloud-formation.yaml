@@ -1,0 +1,167 @@
+Parameters:
+  KeyName:
+    Description: SSH Key to use
+    Type: String
+
+Resources:
+
+  LCService:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      AssociatePublicIpAddress: true
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sda1"
+          Ebs:
+            VolumeType: gp2
+            DeleteOnTermination: true
+            VolumeSize: 8
+      IamInstanceProfile: !Ref InstanceProfileService
+      ImageId: !FindInMap [UbuntuRegionImages, { Ref: "AWS::Region" }, bionic]
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      SecurityGroups:
+        - Ref: SecurityGroupService
+      UserData:
+        File: service.init
+
+  AutoscaleGroupService:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      Cooldown: 300
+      DesiredCapacity: 1
+      HealthCheckGracePeriod: 300
+      HealthCheckType: EC2
+      LaunchConfigurationName: !Ref LCService
+      MaxSize: 10
+      MinSize: 1
+      Tags:
+        - Key: Application
+          Value: !Ref "AWS::StackName"
+          PropagateAtLaunch: true
+        - Key: Name
+          Value: rest-items-test
+          PropagateAtLaunch: true
+      VPCZoneIdentifier:
+        - Ref: SubnetService
+
+  VPC:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 172.23.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: rest-items-test
+        - Key: Application
+          Value: !Ref "AWS::StackName"
+
+  SubnetService:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs {Ref: "AWS::Region"} ]
+      CidrBlock: !Sub 172.23.0.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Application
+          Value: !Ref "AWS::StackName"
+        - Key: Name
+          Value: rest-items-test
+      VpcId:
+        Ref: VPC
+
+  RouteTableMain:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: rest-items-test
+
+  IGWPublicNet:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: rest-items-test
+
+  IGWNetAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId:
+        Ref: IGWPublicNet
+      VpcId:
+        Ref: VPC
+
+  RouteInternet:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: RouteTableMain
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: IGWPublicNet
+    DependsOn:
+      - IGWNetAttachment
+      - RouteTableMain
+
+  SubnetServiceAttach:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref RouteTableMain
+      SubnetId: !Ref SubnetService
+
+  SecurityGroupService:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VPC
+      GroupDescription: rest-items-test
+      SecurityGroupIngress:
+        - { IpProtocol: "icmp", CidrIp: "0.0.0.0/0", FromPort: -1, ToPort: -1 }
+        - { IpProtocol: "tcp", CidrIp: "0.0.0.0/0", FromPort: 22, ToPort: 22 }
+        - { IpProtocol: "tcp", CidrIp: "0.0.0.0/0" , FromPort: 80, ToPort: 80 }
+        - { IpProtocol: "tcp", CidrIp: "0.0.0.0/0" , FromPort: 443, ToPort: 443 }
+      Tags:
+        - Key: Name
+          Value: rest-items-test
+        - Key: Application
+          Value: !Ref "AWS::StackName"
+
+  InstanceProfileService:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - Ref: RoleService
+  
+  RoleService:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns:
+        - Ref: PolicyService
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+                - autoscaling.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      RoleName: !Sub "rest-items-role-${AWS::Region}-${AWS::StackName}"
+  
+  PolicyService:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - "logs:CreateLogStream"
+              - "logs:PutLogEvents"
+            Resource: "arn:aws:logs:*:*:*"
+
+Include:
+  - ubuntu-images.yaml
