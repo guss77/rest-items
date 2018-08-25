@@ -1,0 +1,41 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/rest-items
+    docker:
+      - image: circleci/openjdk:10-jdk-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: rest-items-{{ checksum "pom.xml" }}
+      - run: mvn -B dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: rest-items-{{ checksum "pom.xml" }}
+      - run: mvn -B package
+      - run: mvn -B -DaltDeploymentRepository=repo::default::file:./target/deploy deploy
+#      - store_test_results:
+#          path: target/surefire-reports
+      - store_artifacts:
+          path: target/deploy
+
+  deploy:
+    working_directory: ~/rest-items
+    docker:
+      - image: circleci/golang
+    environemnt:
+      CI_TAG: "{{ .Branch }}"
+    steps:
+      - run: go get -u github.com/tcnksm/ghr
+      - run: ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` target/deploy/io/cloudonix/playground/rest-items/*/
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
