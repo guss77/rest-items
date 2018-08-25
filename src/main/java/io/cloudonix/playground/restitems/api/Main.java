@@ -22,5 +22,6 @@ public class Main extends Controller {
 	Items items;
 	
 	@OnFail
+	@Endpoint("/*")
 	WebHandler failHandler = Request.failureHandler();
 }
