@@ -20,3 +20,11 @@ jobs:
 #          path: target/surefire-reports
       - store_artifacts:
           path: target/deploy
+
+  deploy:
+    working_directory: ~/rest-items
+    docker:
+      - image: circleci/golang
+    steps:
+      - run: go get -u github.com/tcnksm/ghr
+      - run: ghr {{ .Branch }} target/deploy/io/cloudonix/playground/rest-items/*/
