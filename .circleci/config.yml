@@ -29,7 +29,7 @@ jobs:
       CI_TAG: "{{ .Branch }}"
     steps:
       - run: go get -u github.com/tcnksm/ghr
-      - run: ghr -u guss77 "$CI_TAG" target/deploy/io/cloudonix/playground/rest-items/*/
+      - run: ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` target/deploy/io/cloudonix/playground/rest-items/*/
 
 workflows:
   version: 2
