@@ -1,0 +1,25 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/rest-items
+    docker:
+      - image: circleci/openjdk:10-jdk-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: rest-items-{{ checksum "pom.xml" }}
+      - run: mvn -B dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: rest-items-{{ checksum "pom.xml" }}
+      - run: mvn -B package
+#      - store_test_results:
+#          path: target/surefire-reports
+      - store_artifacts:
+          path: target/rest-items-*-fat.jar
+      - store_artifacts:
+          path: target/rest-items-*-source.jar
+      - store_artifacts:
+          path: target/rest-items-*-javadoc.jar
