@@ -28,3 +28,12 @@ jobs:
     steps:
       - run: go get -u github.com/tcnksm/ghr
       - run: ghr {{ .Branch }} target/deploy/io/cloudonix/playground/rest-items/*/
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
