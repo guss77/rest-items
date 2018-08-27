@@ -15,7 +15,7 @@ public class Main extends Controller {
 	BodyHandler bodyHandler = BodyHandler.create();
 	
 	@Endpoint("/*")
-	CorsHandler corsHandler = CorsHandler.create("*");
+	CorsHandler corsHandler = CorsHandler.create("*").allowedHeader("Authorization");
 	
 	@Inject
 	@Endpoint("/items")
