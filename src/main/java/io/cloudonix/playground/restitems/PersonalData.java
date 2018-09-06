@@ -12,6 +12,7 @@ public class PersonalData extends AbstractList<Item> {
 	Instant lastAccess = Instant.now();
 	
 	private HashMap<Integer, Item> data = new HashMap<>();
+	private int size = 0;
 	
 	public PersonalData(ItemService service) {
 		int count = 10 + new Random().nextInt(50);
@@ -30,7 +31,7 @@ public class PersonalData extends AbstractList<Item> {
 
 	@Override
 	public int size() {
-		return data.size();
+		return size;
 	}
 
 	@Override
@@ -49,6 +50,7 @@ public class PersonalData extends AbstractList<Item> {
 		int index = size();
 		e.setId(index);
 		data.put(index, e);
+		size++;
 		return true;
 	}
 }
