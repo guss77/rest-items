@@ -24,7 +24,7 @@ public class Items extends Controller {
 
 	@Get("/")
 	Handler<ItemsRequest> index = r -> {
-		r.sendJSON(r.getData().stream().map(JsonObject::mapFrom)
+		r.sendJSON(r.getData().stream().filter(Objects::nonNull).map(JsonObject::mapFrom)
 				.collect(Collector.<JsonObject, JsonArray>of(JsonArray::new, JsonArray::add, JsonArray::add)));
 	};
 
