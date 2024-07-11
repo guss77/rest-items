@@ -7,31 +7,26 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import io.vertx.core.json.Json;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.json.jackson.DatabindCodec;
 
 public class ItemService {
 
 	private List<Item> itemlist;
 	
 	public ItemService() {
-		itemlist = Json.decodeValue(readFile(ClassLoader.getSystemResourceAsStream("items.json")), new TypeReference<List<Item>>() {})
-				.stream().map(i -> { i.setDescription(i.getName()); return i; }).collect(Collectors.toList());
+		try {
+			var is = ClassLoader.getSystemResourceAsStream("items.json");
+			var json = Buffer.buffer(is.readAllBytes()).toString("UTF-8");
+			itemlist = DatabindCodec.mapper().readValue(json, new TypeReference<List<Item>>() {})
+					.stream().map(i -> { i.setDescription(i.getName()); return i; }).collect(Collectors.toList());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public Item create() {
 		return itemlist.get(new Random().nextInt(itemlist.size()));
-	}
-	
-	private String readFile(InputStream inputStream) {
-		try {
-			StringWriter st = new StringWriter();
-			try (BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream))) {
-				bf.transferTo(st);
-			}
-			return st.toString();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 }

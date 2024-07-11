@@ -30,7 +30,7 @@ public class Items extends Controller {
 
 	@Post("/")
 	Handler<ItemsRequest> create = r -> {
-		r.getData().add(r.getBodyAsJson().mapTo(Item.class));
+		r.getData().add(r.getBodyAs(Item.class));
 		r.put("id", r.getData().size() - 1);
 		r.next();
 	};
@@ -39,7 +39,7 @@ public class Items extends Controller {
 	Handler<ItemsRequest> update = r -> {
 		try {
 			int index = Integer.parseInt(r.pathParam("id"));
-			r.getData().set(index, r.getBodyAsJson().mapTo(Item.class));
+			r.getData().set(index, r.getBodyAs(Item.class));
 			r.put("id", index);
 			r.next();
 		} catch (NullPointerException e) {
@@ -51,12 +51,12 @@ public class Items extends Controller {
 	Handler<ItemsRequest> merge = r -> {
 		try {
 			int index = Integer.parseInt(r.pathParam("id"));
-			JsonObject body = r.getBodyAsJson();
+			JsonObject body = r.body().asJsonObject();
 			if (body.containsKey("sku")) {
 				r.fail(new BadRequest());
 				return;
 			}
-			r.getData().set(index, JsonObject.mapFrom(r.getData().get(index)).mergeIn(body).mapTo(Item.class));
+			r.getData().set(index, JsonObject.mapFrom(r.getData().get(index)).mergeIn(body,100).mapTo(Item.class).purgeProfile());
 			r.put("id", index);
 			r.next();
 		} catch (NullPointerException e) {
