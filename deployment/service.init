@@ -48,7 +48,7 @@ write_files:
      ExecStartPre=-/usr/bin/docker kill rest-items
      ExecStartPre=-/usr/bin/docker rm rest-items
      ExecStartPre=/usr/bin/docker pull openjdk:10-slim
-     ExecStartPre=/usr/bin/curl -sfL https://github.com/guss77/rest-items/releases/download/1.0.6/rest-items-1.0.6-fat.jar -o /usr/local/bin/rest-items.jar
+     ExecStartPre=/usr/bin/curl -sfL https://github.com/guss77/rest-items/releases/download/1.0.7/rest-items-1.0.7-fat.jar -o /usr/local/bin/rest-items.jar
      ExecStart=/usr/bin/docker run -a stdout -a stderr \
        --name rest-items \
        -e "JVM_OPTIONS=-Xmx800m -XX:+CrashOnOutOfMemoryError" \

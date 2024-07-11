@@ -5,24 +5,29 @@ Parameters:
 
 Resources:
 
-  LCService:
-    Type: AWS::AutoScaling::LaunchConfiguration
+  LTService:
+    Type: AWS::EC2::LaunchTemplate
     Properties:
-      AssociatePublicIpAddress: true
-      BlockDeviceMappings:
-        - DeviceName: "/dev/sda1"
-          Ebs:
-            VolumeType: gp2
-            DeleteOnTermination: true
-            VolumeSize: 8
-      IamInstanceProfile: !Ref InstanceProfileService
-      ImageId: !FindInMap [UbuntuRegionImages, { Ref: "AWS::Region" }, bionic]
-      InstanceType: t2.micro
-      KeyName: !Ref KeyName
-      SecurityGroups:
-        - Ref: SecurityGroupService
-      UserData:
-        File: service.init
+      LaunchTemplateData:
+        BlockDeviceMappings:
+          - DeviceName: "/dev/sda1"
+            Ebs:
+              VolumeType: gp3
+              DeleteOnTermination: true
+              VolumeSize: 8
+        IamInstanceProfile:
+          Name: !Ref InstanceProfileService
+        ImageId: !FindInMap [UbuntuRegionImages, { Ref: "AWS::Region" }, jammy]
+        InstanceType: t3.micro
+        KeyName: !Ref KeyName
+        NetworkInterfaces:
+          - DeviceIndex: 0
+            AssociatePublicIpAddress: true
+            Ipv6AddressCount: 1
+            Groups:
+              - Ref: SecurityGroupService
+        UserData:
+          File: service.init
 
   AutoscaleGroupService:
     Type: AWS::AutoScaling::AutoScalingGroup
@@ -31,7 +36,9 @@ Resources:
       DesiredCapacity: 1
       HealthCheckGracePeriod: 300
       HealthCheckType: EC2
-      LaunchConfigurationName: !Ref LCService
+      LaunchTemplate:
+        LaunchTemplateId: !Ref LTService
+        Version: !GetAtt LTService.LatestVersionNumber
       MaxSize: 10
       MinSize: 1
       Tags:

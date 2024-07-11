@@ -1,14 +1,11 @@
 package io.cloudonix.playground.restitems;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 import io.vertx.core.*;
 import io.vertx.core.http.HttpServer;
-import io.vertx.core.json.Json;
-import tech.greenfield.vertx.irked.Router;
 
 public class Server extends AbstractVerticle {
 	
@@ -16,16 +13,17 @@ public class Server extends AbstractVerticle {
 	Configuration conf;
 	
 	@Inject
-	Router router;
+	HttpServer httpServer;
 	
 	@Override
-	public void start(Future<Void> startFuture) throws Exception {
-		Json.mapper.configure(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS, true);
-		Injector injector = Guice.createInjector(new AppConfiguration(config(), vertx));
-		injector.injectMembers(this);
-		Future<HttpServer> fut = Future.future();
-		vertx.createHttpServer().requestHandler(router::accept).listen(conf.getPort(), fut);
-		fut.<Void>map(v -> null).setHandler(startFuture);
+	public void start(Promise<Void> startPromise) throws Exception {
+		try {
+			Injector injector = Guice.createInjector(new AppConfiguration(config(), vertx));
+			injector.injectMembers(this);
+			httpServer.listen(conf.getPort()).<Void>mapEmpty().andThen(startPromise);
+		} catch (Exception e) {
+			startPromise.fail(e);
+		}
 	}
 
 	public static void main(String[] args) {
