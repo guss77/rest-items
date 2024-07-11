@@ -54,7 +54,7 @@ write_files:
        -e "JVM_OPTIONS=-Xmx800m -XX:+CrashOnOutOfMemoryError" \
        -p 80:1280  \
        -v /usr/local/bin/rest-items.jar:/app/rest-items.jar \
-       amazoncorretto:21 -jar /app/rest-items.jar
+       amazoncorretto:21 java -jar /app/rest-items.jar
      ExecStop=/usr/bin/docker stop rest-items
      Restart=always
      RestartSec=1s
