@@ -47,14 +47,14 @@ write_files:
      SyslogIdentifier=rest-items
      ExecStartPre=-/usr/bin/docker kill rest-items
      ExecStartPre=-/usr/bin/docker rm rest-items
-     ExecStartPre=/usr/bin/docker pull openjdk:10-slim
+     ExecStartPre=/usr/bin/docker pull amazoncorretto:21
      ExecStartPre=/usr/bin/curl -sfL https://github.com/guss77/rest-items/releases/download/1.1.0/rest-items-1.1.0-fat.jar -o /usr/local/bin/rest-items.jar
      ExecStart=/usr/bin/docker run -a stdout -a stderr \
        --name rest-items \
        -e "JVM_OPTIONS=-Xmx800m -XX:+CrashOnOutOfMemoryError" \
        -p 80:1280  \
        -v /usr/local/bin/rest-items.jar:/app/rest-items.jar \
-       openjdk:10-slim java -jar /app/rest-items.jar
+       amazoncorretto:21 -jar /app/rest-items.jar
      ExecStop=/usr/bin/docker stop rest-items
      Restart=always
      RestartSec=1s
