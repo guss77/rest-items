@@ -52,7 +52,7 @@ Resources:
         - Ref: SubnetService
 
   VPC:
-    Type: "AWS::EC2::VPC"
+    Type: AWS::EC2::VPC
     Properties:
       CidrBlock: 172.23.0.0/16
       EnableDnsSupport: true
@@ -62,12 +62,24 @@ Resources:
           Value: rest-items-test
         - Key: Application
           Value: !Ref "AWS::StackName"
+  VPCipv6:
+    Type: AWS::EC2::VPCCidrBlock
+    Properties:
+      VpcId: !Ref VPC
+      AmazonProvidedIpv6CidrBlock: true
 
   SubnetService:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone: !Select [ 1, !GetAZs {Ref: "AWS::Region"} ]
       CidrBlock: !Sub 172.23.0.0/24
+      Ipv6CidrBlock:
+        Fn::Select:
+          - 1
+          - Fn::Cidr:
+            - !Select [0, !GetAtt VPC.Ipv6CidrBlocks]
+            - 256
+            - 64
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Application
@@ -107,6 +119,17 @@ Resources:
       RouteTableId:
         Ref: RouteTableMain
       DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: IGWPublicNet
+    DependsOn:
+      - IGWNetAttachment
+      - RouteTableMain
+  RouteInternetIPv6:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: RouteTableMain
+      DestinationIpv6CidrBlock: "::/0"
       GatewayId:
         Ref: IGWPublicNet
     DependsOn:
