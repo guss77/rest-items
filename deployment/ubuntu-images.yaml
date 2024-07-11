@@ -1,160 +1,222 @@
 ---
 Mappings:
   UbuntuRegionImages:
-    il-central-1:
-      Xenial Xerus: ami-08734ec479a1ace4a
-      Bionic Beaver: ami-07960758e7daf1083
-      Jammy Jellyfish: ami-01bbc242f90fb2d97
-      Focal Fossa: ami-0c06432696d194a08
-    us-gov-east-1:
-      Xenial Xerus: ami-077062c5cfb91a89e
-      Bionic Beaver: ami-02860be21b1307ce5
-    ca-central-1:
-      Xenial Xerus: ami-03bcd79f25ca6b127
-      Bionic Beaver: ami-0de0dd4aba99b4a81
-      Jammy Jellyfish: ami-048ddca51ab3229ab
-      Focal Fossa: ami-0d3ebcbcdf994d267
-    us-gov-west-1:
-      Xenial Xerus: ami-029c925c0f16a0956
-      Bionic Beaver: ami-0a6242c1d41db7bde
-    eu-west-3:
-      Xenial Xerus: ami-052f10f1c45aa2155
-      Bionic Beaver: ami-05ad84af46e508c4d
-      Jammy Jellyfish: ami-0062b622072515714
-      Focal Fossa: ami-07ff3a0f7cc3ee7e9
-    eu-central-1:
-      Xenial Xerus: ami-09042b2f6d07d164a
-      Bionic Beaver: ami-03cea216f9d507835
-      Jammy Jellyfish: ami-07652eda1fbad7432
-      Focal Fossa: ami-0fcc32e5ab94ef9c2
-    ap-south-2:
-      Xenial Xerus: ami-047248cf574e28ecc
-      Bionic Beaver: ami-00c53d8c6d0dae9f2
-      Jammy Jellyfish: ami-00680cef23a721c2a
-      Focal Fossa: ami-0c98b7a98c4182c5c
-    ap-southeast-2:
-      Xenial Xerus: ami-0672b175139a0f8f4
-      Bionic Beaver: ami-00c0f390601db0712
-      Jammy Jellyfish: ami-0375ab65ee943a2a6
-      Focal Fossa: ami-031a6a3cbaebd96fd
-    ap-northeast-3:
-      Xenial Xerus: ami-00f5d213b513f1b07
-      Bionic Beaver: ami-0efcc49ae1b1b93b2
-      Jammy Jellyfish: ami-0a70c5266db4a6202
-      Focal Fossa: ami-08665bf1637c9b245
-    ap-northeast-1:
-      Xenial Xerus: ami-0822295a729d2a28e
-      Bionic Beaver: ami-0e668b41786fecce6
-      Jammy Jellyfish: ami-0162fe8bfebb6ea16
-      Focal Fossa: ami-01b0423ed71bb280c
-    ca-west-1:
-      Xenial Xerus: ami-0455d3863d576d2a4
-      Bionic Beaver: ami-0efd64d71df080d59
-      Jammy Jellyfish: ami-08fa6bf45a9f39b9e
-      Focal Fossa: ami-07ce2430f97a1fad1
-    me-central-1:
-      Xenial Xerus: ami-0f58366b64c84be8b
-      Bionic Beaver: ami-0ca8b46c2794b82c4
-      Jammy Jellyfish: ami-0a389865294dadfe2
-      Focal Fossa: ami-05174cb6cee76763d
-    us-west-1:
-      Xenial Xerus: ami-0454207e5367abf01
-      Bionic Beaver: ami-09563a10670fc573c
-      Jammy Jellyfish: ami-0ecaad63ed3668fca
-      Focal Fossa: ami-07cef98a7cbb3ffe6
-    us-east-2:
-      Xenial Xerus: ami-05803413c51f242b7
-      Bionic Beaver: ami-0bb220fc4bffd88dd
-      Jammy Jellyfish: ami-003932de22c285676
-      Focal Fossa: ami-0f511dde9605eb0b6
-    eu-south-2:
-      Xenial Xerus: ami-06c8e9684e3742315
-      Bionic Beaver: ami-0f3e2ff11564b8b74
-      Jammy Jellyfish: ami-0549851bafe151f6c
-      Focal Fossa: ami-0f24537a0879d4081
-    eu-north-1:
-      Xenial Xerus: ami-000e50175c5f86214
-      Bionic Beaver: ami-09256263f8d0f1be1
-      Jammy Jellyfish: ami-07a0715df72e58928
-      Focal Fossa: ami-007f873b1c4221f21
-    ap-southeast-4:
-      Xenial Xerus: ami-0dda149f4c9f2af1b
-      Bionic Beaver: ami-0f6856c16d54228bb
-      Jammy Jellyfish: ami-0d5de3084c18e52d9
-      Focal Fossa: ami-0d000c73c217d45ce
     af-south-1:
-      Xenial Xerus: ami-063a9ea2ff5685f7f
-      Bionic Beaver: ami-062f25c91d0d97e98
-      Jammy Jellyfish: ami-0e806decb501416d7
-      Focal Fossa: ami-037fd8cae252561a8
-    sa-east-1:
-      Xenial Xerus: ami-0a729bdc1acf7528b
-      Bionic Beaver: ami-0cc56294a584ac234
-      Jammy Jellyfish: ami-01a38093d387a7497
-      Focal Fossa: ami-0b9c868bb36bc53ed
-    ap-south-1:
-      Xenial Xerus: ami-0f2e255ec956ade7f
-      Bionic Beaver: ami-00f994c719fc62e9e
-      Jammy Jellyfish: ami-0c2af51e265bd5e0e
-      Focal Fossa: ami-0e5c1d026c0d06b14
-    ap-southeast-3:
-      Xenial Xerus: ami-0e1af156739c38b84
-      Bionic Beaver: ami-09770e967058c0c28
-      Jammy Jellyfish: ami-06a2e6561950f5040
-      Focal Fossa: ami-0606083769e81a49d
-    eu-west-2:
-      Xenial Xerus: ami-09a2a0f7d2db8baca
-      Bionic Beaver: ami-0fa5e6848bdd182d5
-      Jammy Jellyfish: ami-07d20571c32ba6cdc
-      Focal Fossa: ami-04d38dce85529f5a2
-    eu-west-1:
-      Xenial Xerus: ami-0f29c8402f8cce65c
-      Bionic Beaver: ami-0e42de9d667b232f7
-      Jammy Jellyfish: ami-0932dacac40965a65
-      Focal Fossa: ami-0887c7673564b061c
+      bionic: ami-062f25c91d0d97e98
+      focal: ami-037fd8cae252561a8
+      jammy: ami-0e806decb501416d7
+      mantic: ami-09d6b41e988d97005
+      noble: ami-0086906003e8c14dc
+      xenial: ami-063a9ea2ff5685f7f
     ap-east-1:
-      Xenial Xerus: ami-038ff3475cbb62351
-      Bionic Beaver: ami-0742c6c69f69d7099
-      Jammy Jellyfish: ami-01412724cbc6252ef
-      Focal Fossa: ami-0af81bcec74dbad42
-    us-east-1:
-      Xenial Xerus: ami-0b0ea68c435eb488d
-      Bionic Beaver: ami-055744c75048d8296
-      Jammy Jellyfish: ami-0a0e5d9c7acc336f1
-      Focal Fossa: ami-0ba8562d785e35387
-    eu-central-2:
-      Xenial Xerus: ami-0c9b6c268ecacf10b
-      Bionic Beaver: ami-09eb6e3600939377f
-      Jammy Jellyfish: ami-02871ac2c044b004f
-      Focal Fossa: ami-0ed085f26b2eb5428
-    eu-south-1:
-      Xenial Xerus: ami-027f7881d2f6725e1
-      Bionic Beaver: ami-00a33f689482e974e
-      Jammy Jellyfish: ami-05dfcfdd4f0f2620f
-      Focal Fossa: ami-0b527297e1ae280a9
-    me-south-1:
-      Xenial Xerus: ami-0c41538a47f4b7d47
-      Bionic Beaver: ami-00d0e78f1d77294d2
-      Jammy Jellyfish: ami-0674e550ebeaf53d0
-      Focal Fossa: ami-09013503947c5872d
-    us-west-2:
-      Xenial Xerus: ami-0688ba7eeeeefe3cd
-      Bionic Beaver: ami-0a588942e90cfecc9
-      Jammy Jellyfish: ami-0075013580f6322a1
-      Focal Fossa: ami-0577a6ec46b349644
-    ap-southeast-1:
-      Xenial Xerus: ami-0f74c08b8b5effa56
-      Bionic Beaver: ami-0950bf7d28f290092
-      Jammy Jellyfish: ami-0497a974f8d5dcef8
-      Focal Fossa: ami-0e3c763f8580b0e1b
+      bionic: ami-0742c6c69f69d7099
+      focal: ami-0af81bcec74dbad42
+      jammy: ami-01412724cbc6252ef
+      mantic: ami-0448120174e5d54b4
+      noble: ami-035cc4d90bdce859c
+      xenial: ami-038ff3475cbb62351
+    ap-northeast-1:
+      bionic: ami-0e668b41786fecce6
+      focal: ami-01b0423ed71bb280c
+      jammy: ami-0162fe8bfebb6ea16
+      mantic: ami-05ef63daadbc32f21
+      noble: ami-0f8843f3286f6a967
+      xenial: ami-0822295a729d2a28e
     ap-northeast-2:
-      Xenial Xerus: ami-0dd97ebb907cf9366
-      Bionic Beaver: ami-0419dc605b6dde61f
-      Jammy Jellyfish: ami-056a29f2eddc40520
-      Focal Fossa: ami-072a566d0292e7d1b
+      bionic: ami-0419dc605b6dde61f
+      focal: ami-072a566d0292e7d1b
+      jammy: ami-056a29f2eddc40520
+      mantic: ami-065955c07b1ae7d83
+      noble: ami-0535be68cbe2fd720
+      xenial: ami-0dd97ebb907cf9366
+    ap-northeast-3:
+      bionic: ami-0efcc49ae1b1b93b2
+      focal: ami-08665bf1637c9b245
+      jammy: ami-0a70c5266db4a6202
+      mantic: ami-0482047faf74c80f7
+      noble: ami-0f2e570772d49485c
+      xenial: ami-00f5d213b513f1b07
+    ap-south-1:
+      bionic: ami-00f994c719fc62e9e
+      focal: ami-0e5c1d026c0d06b14
+      jammy: ami-0c2af51e265bd5e0e
+      mantic: ami-00e9c628b16c3b16f
+      noble: ami-0c3800cc1f88cdd04
+      xenial: ami-0f2e255ec956ade7f
+    ap-south-2:
+      bionic: ami-00c53d8c6d0dae9f2
+      focal: ami-0c98b7a98c4182c5c
+      jammy: ami-00680cef23a721c2a
+      mantic: ami-08cee9650a03d5159
+      noble: ami-0425fce21d3d01822
+      xenial: ami-047248cf574e28ecc
+    ap-southeast-1:
+      bionic: ami-0950bf7d28f290092
+      focal: ami-0e3c763f8580b0e1b
+      jammy: ami-0497a974f8d5dcef8
+      mantic: ami-049b74b24b4c16640
+      noble: ami-09005bce47e1d2c7f
+      xenial: ami-0f74c08b8b5effa56
+    ap-southeast-2:
+      bionic: ami-00c0f390601db0712
+      focal: ami-031a6a3cbaebd96fd
+      jammy: ami-0375ab65ee943a2a6
+      mantic: ami-01f1dd856caccf846
+      noble: ami-05d1a3bc8661667fa
+      xenial: ami-0672b175139a0f8f4
+    ap-southeast-3:
+      bionic: ami-09770e967058c0c28
+      focal: ami-0606083769e81a49d
+      jammy: ami-06a2e6561950f5040
+      mantic: ami-040f137ecc3b39ac8
+      noble: ami-0854f84b87cf92b27
+      xenial: ami-0e1af156739c38b84
+    ap-southeast-4:
+      bionic: ami-0f6856c16d54228bb
+      focal: ami-0d000c73c217d45ce
+      jammy: ami-0d5de3084c18e52d9
+      mantic: ami-0989aba44590c15b8
+      noble: ami-0664383b942c710c9
+      xenial: ami-0dda149f4c9f2af1b
+    ca-central-1:
+      bionic: ami-0de0dd4aba99b4a81
+      focal: ami-0d3ebcbcdf994d267
+      jammy: ami-048ddca51ab3229ab
+      mantic: ami-09ea63e99a0ec1156
+      noble: ami-0543644c9ff6a0469
+      xenial: ami-03bcd79f25ca6b127
+    ca-west-1:
+      bionic: ami-0efd64d71df080d59
+      focal: ami-07ce2430f97a1fad1
+      jammy: ami-08fa6bf45a9f39b9e
+      mantic: ami-0d30ed8c46430b48c
+      noble: ami-001b5703066f35563
+      xenial: ami-0455d3863d576d2a4
     cn-north-1:
-      Jammy Jellyfish: ami-06f99bb56e6280f31
-      Focal Fossa: ami-05780fbccaa4f324d
+      focal: ami-05780fbccaa4f324d
+      jammy: ami-06f99bb56e6280f31
+      mantic: ami-0aa6deaf6a9dbdded
+      noble: ami-087c2faa764dbb506
     cn-northwest-1:
-      Jammy Jellyfish: ami-0e73276ab58c89dec
-      Focal Fossa: ami-09eab1ce3493f309a
+      focal: ami-09eab1ce3493f309a
+      jammy: ami-0e73276ab58c89dec
+      mantic: ami-055c9a1833c2db07d
+      noble: ami-0208e6e19c2dcfcc5
+    eu-central-1:
+      bionic: ami-03cea216f9d507835
+      focal: ami-0fcc32e5ab94ef9c2
+      jammy: ami-07652eda1fbad7432
+      mantic: ami-0e31bd0dbb607ac24
+      noble: ami-0535841b2d799b954
+      xenial: ami-09042b2f6d07d164a
+    eu-central-2:
+      bionic: ami-09eb6e3600939377f
+      focal: ami-0ed085f26b2eb5428
+      jammy: ami-02871ac2c044b004f
+      mantic: ami-0c21bdb5b32958f88
+      noble: ami-016000167b8b49b7e
+      xenial: ami-0c9b6c268ecacf10b
+    eu-north-1:
+      bionic: ami-09256263f8d0f1be1
+      focal: ami-007f873b1c4221f21
+      jammy: ami-07a0715df72e58928
+      mantic: ami-0862d4db84916e260
+      noble: ami-0ce4ce512f232e50e
+      xenial: ami-000e50175c5f86214
+    eu-south-1:
+      bionic: ami-00a33f689482e974e
+      focal: ami-0b527297e1ae280a9
+      jammy: ami-05dfcfdd4f0f2620f
+      mantic: ami-0e57ef6d42a2fa978
+      noble: ami-0097a5f1b26eb360a
+      xenial: ami-027f7881d2f6725e1
+    eu-south-2:
+      bionic: ami-0f3e2ff11564b8b74
+      focal: ami-0f24537a0879d4081
+      jammy: ami-0549851bafe151f6c
+      mantic: ami-0b50b98cdee5ce10f
+      noble: ami-003cea5c12831a1f6
+      xenial: ami-06c8e9684e3742315
+    eu-west-1:
+      bionic: ami-0e42de9d667b232f7
+      focal: ami-0887c7673564b061c
+      jammy: ami-0932dacac40965a65
+      mantic: ami-0b7f6ac1e940d1b7f
+      noble: ami-0dab666fb854aee3a
+      xenial: ami-0f29c8402f8cce65c
+    eu-west-2:
+      bionic: ami-0fa5e6848bdd182d5
+      focal: ami-04d38dce85529f5a2
+      jammy: ami-07d20571c32ba6cdc
+      mantic: ami-06b19b7025cb65bac
+      noble: ami-0531a8f0aa053db43
+      xenial: ami-09a2a0f7d2db8baca
+    eu-west-3:
+      bionic: ami-05ad84af46e508c4d
+      focal: ami-07ff3a0f7cc3ee7e9
+      jammy: ami-0062b622072515714
+      mantic: ami-058df6adbd3c8146e
+      noble: ami-0f4dc20998dc8158d
+      xenial: ami-052f10f1c45aa2155
+    il-central-1:
+      bionic: ami-07960758e7daf1083
+      focal: ami-0c06432696d194a08
+      jammy: ami-01bbc242f90fb2d97
+      mantic: ami-0b9e46545d56f92a7
+      noble: ami-069c039b3893b2969
+      xenial: ami-08734ec479a1ace4a
+    me-central-1:
+      bionic: ami-0ca8b46c2794b82c4
+      focal: ami-05174cb6cee76763d
+      jammy: ami-0a389865294dadfe2
+      mantic: ami-057ba9add7e57c2e0
+      noble: ami-08d1862a596ad3be3
+      xenial: ami-0f58366b64c84be8b
+    me-south-1:
+      bionic: ami-00d0e78f1d77294d2
+      focal: ami-09013503947c5872d
+      jammy: ami-0674e550ebeaf53d0
+      mantic: ami-01213b3bcfe530245
+      noble: ami-07b8b01a9bb5fee35
+      xenial: ami-0c41538a47f4b7d47
+    sa-east-1:
+      bionic: ami-0cc56294a584ac234
+      focal: ami-0b9c868bb36bc53ed
+      jammy: ami-01a38093d387a7497
+      mantic: ami-067762bc6a537bdce
+      noble: ami-084fdddef350640f4
+      xenial: ami-0a729bdc1acf7528b
+    us-east-1:
+      bionic: ami-055744c75048d8296
+      focal: ami-0ba8562d785e35387
+      jammy: ami-0a0e5d9c7acc336f1
+      mantic: ami-0c4afbf1fc15631cf
+      noble: ami-06f4fa348c295a6f6
+      xenial: ami-0b0ea68c435eb488d
+    us-east-2:
+      bionic: ami-0bb220fc4bffd88dd
+      focal: ami-0f511dde9605eb0b6
+      jammy: ami-003932de22c285676
+      mantic: ami-059e5463eafab8c69
+      noble: ami-0cb1abde5aafd0260
+      xenial: ami-05803413c51f242b7
+    us-gov-east-1:
+      bionic: ami-02860be21b1307ce5
+      xenial: ami-077062c5cfb91a89e
+    us-gov-west-1:
+      bionic: ami-0a6242c1d41db7bde
+      xenial: ami-029c925c0f16a0956
+    us-west-1:
+      bionic: ami-09563a10670fc573c
+      focal: ami-07cef98a7cbb3ffe6
+      jammy: ami-0ecaad63ed3668fca
+      mantic: ami-0c5f49c053d0d0598
+      noble: ami-0c2a828f0d25d092a
+      xenial: ami-0454207e5367abf01
+    us-west-2:
+      bionic: ami-0a588942e90cfecc9
+      focal: ami-0577a6ec46b349644
+      jammy: ami-0075013580f6322a1
+      mantic: ami-08fdb3dc7e86c6a4f
+      noble: ami-0ea4e9f7a6f7c30c8
+      xenial: ami-0688ba7eeeeefe3cd
