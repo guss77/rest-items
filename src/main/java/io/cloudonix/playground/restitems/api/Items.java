@@ -53,7 +53,7 @@ public class Items extends Controller {
 			int index = Integer.parseInt(r.pathParam("id"));
 			JsonObject body = r.body().asJsonObject();
 			if (body.containsKey("sku")) {
-				r.fail(new BadRequest());
+				r.fail(new BadRequest("SKU must not be updated"));
 				return;
 			}
 			r.getData().set(index, JsonObject.mapFrom(r.getData().get(index)).mergeIn(body,100).mapTo(Item.class).purgeProfile());
